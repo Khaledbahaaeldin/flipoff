@@ -1,6 +1,15 @@
 import { CHARSET, SCRAMBLE_COLORS, SCRAMBLE_DURATION, FLIP_DURATION } from './constants.js';
 
 export class Tile {
+  static scrambleColors = [...SCRAMBLE_COLORS];
+
+  static setScrambleColors(colors) {
+    if (!Array.isArray(colors) || colors.length === 0) {
+      return;
+    }
+    Tile.scrambleColors = [...colors];
+  }
+
   constructor(row, col) {
     this.row = row;
     this.col = col;
@@ -59,7 +68,8 @@ export class Tile {
         this.frontSpan.textContent = randChar === ' ' ? '' : randChar;
 
         // Cycle background color
-        const color = SCRAMBLE_COLORS[scrambleCount % SCRAMBLE_COLORS.length];
+        const palette = Tile.scrambleColors;
+        const color = palette[scrambleCount % palette.length];
         this.frontEl.style.backgroundColor = color;
 
         // Briefly change text color for contrast on light backgrounds

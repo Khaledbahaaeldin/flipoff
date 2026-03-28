@@ -10,16 +10,42 @@
   <link rel="stylesheet" href="css/board.css">
   <link rel="stylesheet" href="css/tile.css">
   <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/entry.css">
 </head>
 <body>
 
-  <div class="page-frame">
+  <section class="entry-screen" id="entry-screen">
+    <div class="entry-bg-layer"></div>
+    <div class="entry-card">
+      <p class="entry-badge">FLIPOFF EXPERIENCE</p>
+      <h1>Choose Your Display Mode</h1>
+      <p class="entry-subtitle">
+        Launch your premium split-flap board in one tap.
+        Showcase brings full energy. Sleep keeps it calm and quiet.
+      </p>
+
+      <div class="entry-actions">
+        <button id="launch-showcase" class="entry-btn entry-btn-primary" type="button">
+          <span class="entry-btn-title">Run Showcase</span>
+          <span class="entry-btn-meta">Fullscreen, sound on, dynamic flow</span>
+        </button>
+        <button id="launch-sleep" class="entry-btn entry-btn-secondary" type="button">
+          <span class="entry-btn-title">Run Sleep</span>
+          <span class="entry-btn-meta">Quiet mode, utility-first display</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <div class="page-frame app-hidden" id="app-shell">
     <!-- Header -->
     <header class="header">
       <div class="header-logo">FlipOff.</div>
       <nav class="header-nav">
-        <a href="#features">Features</a>
-        <a href="#pricing">Pricing</a>
+        <div class="mode-switch" role="tablist" aria-label="Display mode">
+          <button class="mode-btn" data-mode="showcase" title="Showcase mode (1)">Showcase</button>
+          <button class="mode-btn" data-mode="sleep" title="Sleep mode (2)">Sleep</button>
+        </div>
         <button class="volume-icon" id="volume-btn" title="Toggle sound">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>

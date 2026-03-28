@@ -1,7 +1,7 @@
 import { Tile } from './Tile.js';
 import {
   GRID_COLS, GRID_ROWS, STAGGER_DELAY, SCRAMBLE_DURATION,
-  TOTAL_TRANSITION, ACCENT_COLORS
+  TOTAL_TRANSITION, ACCENT_COLORS, MODE_PROFILES, MODES
 } from './constants.js';
 
 export class Board {
@@ -13,6 +13,8 @@ export class Board {
     this.tiles = [];
     this.currentGrid = [];
     this.accentIndex = 0;
+    this.mode = MODES.SHOWCASE;
+    this.accentColors = [...ACCENT_COLORS];
 
     // Build board DOM
     this.boardEl = document.createElement('div');
@@ -68,11 +70,27 @@ export class Board {
       <div><span>Previous</span><kbd>\u2190</kbd></div>
       <div><span>Fullscreen</span><kbd>F</kbd></div>
       <div><span>Mute</span><kbd>M</kbd></div>
+      <div><span>Showcase</span><kbd>1</kbd></div>
+      <div><span>Sleep</span><kbd>2</kbd></div>
     `;
     this.boardEl.appendChild(overlay);
 
     containerEl.appendChild(this.boardEl);
     this._updateAccentColors();
+  }
+
+  setMode(mode) {
+    this.mode = mode;
+    const profile = MODE_PROFILES[mode] || MODE_PROFILES[MODES.SHOWCASE];
+    this.accentColors = profile.accentColors && profile.accentColors.length
+      ? [...profile.accentColors]
+      : [...ACCENT_COLORS];
+    this.accentIndex = 0;
+    this._updateAccentColors();
+
+    if (profile.scrambleColors && profile.scrambleColors.length) {
+      Tile.setScrambleColors(profile.scrambleColors);
+    }
   }
 
   _createAccentBar(extraClass) {
@@ -88,7 +106,7 @@ export class Board {
   }
 
   _updateAccentColors() {
-    const color = ACCENT_COLORS[this.accentIndex % ACCENT_COLORS.length];
+    const color = this.accentColors[this.accentIndex % this.accentColors.length];
     const segments = this.boardEl.querySelectorAll('.accent-segment');
     segments.forEach(seg => {
       seg.style.backgroundColor = color;

@@ -38,6 +38,18 @@ export class SoundEngine {
     return this.muted;
   }
 
+  setMuted(value) {
+    this.muted = Boolean(value);
+    return this.muted;
+  }
+
+  applyModeProfile(profile) {
+    if (!profile) return;
+    if (typeof profile.defaultMuted === 'boolean') {
+      this.setMuted(profile.defaultMuted);
+    }
+  }
+
   /**
    * Play the full transition sound once.
    * This is a single recorded clip of a split-flap board transition,

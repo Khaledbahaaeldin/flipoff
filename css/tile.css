@@ -1,7 +1,7 @@
 /* Tile Wrapper */
 .tile {
-  width: var(--tile-size);
-  height: var(--tile-size);
+  width: var(--tile-width);
+  height: var(--tile-height);
   perspective: 400px;
   background: #111;
   border-radius: 3px;
@@ -34,7 +34,7 @@
 
 .tile-front span,
 .tile-back span {
-  font-size: calc(var(--tile-size) * 0.52);
+  font-size: calc(min(var(--tile-width), var(--tile-height)) * 0.52);
   font-weight: 700;
   color: #FFFFFF;
   text-transform: uppercase;

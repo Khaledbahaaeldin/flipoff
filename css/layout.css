@@ -30,18 +30,36 @@
 .header-nav {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 16px;
 }
 
-.header-nav a {
-  font-size: 14px;
-  font-weight: 500;
+.mode-switch {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px;
+  border-radius: 999px;
+  background: #E8E8E8;
+  border: 1px solid #D8D8D8;
+}
+
+.mode-btn {
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
   color: #666;
-  transition: color 0.2s;
+  background: transparent;
+  transition: all 0.2s ease;
 }
 
-.header-nav a:hover {
-  color: #000;
+.mode-btn:hover {
+  color: #111;
+}
+
+.mode-btn.active {
+  color: #FFF;
+  background: #111;
 }
 
 .volume-icon {
@@ -132,6 +150,29 @@
   justify-content: center;
   align-items: flex-start;
   padding: 0 24px 32px;
+}
+
+/* Showcase kiosk mode in normal window (fallback when fullscreen is blocked). */
+body.showcase-kiosk .page-frame {
+  max-width: none;
+  margin: 0;
+  border-radius: 0;
+  min-height: 100vh;
+  box-shadow: none;
+  background: #111;
+}
+
+body.showcase-kiosk .header,
+body.showcase-kiosk .hero {
+  display: none !important;
+}
+
+body.showcase-kiosk .board-section {
+  height: 100vh;
+  width: 100vw;
+  padding: 0;
+  align-items: stretch;
+  justify-content: stretch;
 }
 
 /* Fullscreen: hide header+hero, board fills viewport */

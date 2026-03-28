@@ -1,7 +1,10 @@
+import { MODES } from './constants.js';
+
 export class KeyboardController {
-  constructor(rotator, soundEngine) {
+  constructor(rotator, soundEngine, modeManager) {
     this.rotator = rotator;
     this.soundEngine = soundEngine;
+    this.modeManager = modeManager;
 
     document.addEventListener('keydown', (e) => this._handleKey(e));
   }
@@ -39,6 +42,22 @@ export class KeyboardController {
         if (this.soundEngine) {
           const muted = this.soundEngine.toggleMute();
           this._showToast(muted ? 'Sound off' : 'Sound on');
+        }
+        break;
+
+      case '1':
+        e.preventDefault();
+        if (this.modeManager) {
+          this.modeManager.setMode(MODES.SHOWCASE);
+          this._showToast('Showcase mode');
+        }
+        break;
+
+      case '2':
+        e.preventDefault();
+        if (this.modeManager) {
+          this.modeManager.setMode(MODES.SLEEP);
+          this._showToast('Sleep mode');
         }
         break;
 
